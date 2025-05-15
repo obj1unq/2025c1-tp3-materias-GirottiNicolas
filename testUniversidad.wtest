@@ -1,0 +1,17 @@
+import materias.*
+
+describe "Test de funcionalidad " {
+
+    method initialize(){
+        
+    }
+    test "Requisitos materias" {
+        assert.equals([matematica1,objetos1],objetos2.requisitos())
+        assert.equals([objetos2,basesDeDatos],objetos3.requisitos())
+        assert.equals([objetos1, basesDeDatos],programacionConcurrente.requisitos())
+        assert.equals([biologia1],biologia2.requisitos())
+    }
+
+    test "Aprobar materias" {
+    }
+}
