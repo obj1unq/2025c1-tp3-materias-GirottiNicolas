@@ -1,5 +1,5 @@
 import materias.*
-
+import estudiantes.*
 describe "Test de funcionalidad " {
 
     method initialize(){
@@ -12,6 +12,7 @@ describe "Test de funcionalidad " {
         assert.equals([biologia1],biologia2.requisitos())
     }
 
-    test "Aprobar materias" {
+    test "inscribirse materias" {
+        
     }
 }
