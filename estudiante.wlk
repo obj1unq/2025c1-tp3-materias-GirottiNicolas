@@ -1,8 +1,8 @@
-import universidad.Historial
+import universidad.HistorialDeEstudiante
 
 
 class Estudiante {
-    var property historial = new Historial()
+    var property historial = new HistorialDeEstudiante()
     
     method carreras(){
         return []

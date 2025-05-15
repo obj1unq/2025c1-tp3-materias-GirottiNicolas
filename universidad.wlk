@@ -1,5 +1,6 @@
 import carreras.*
 
+
 object universidad {
     const carreras = [programacion, medicina,derecho ]
 }
@@ -11,48 +12,24 @@ class Carrera {
 }
 
 
+
 class Materia {
     
     var property carrera  
-
+    var property cupo = 30
+    var property listaDeEspera = []
     const property estudiantes = #{}
+
+    const property inscripcion = new Inscripcion(materia = self)
     
-    method cupo(){ return 30}
 
     method requisitos() {return []}
-
-
-    method inscribir(estudiante){
-        self.validarInscripcion(estudiante)
-        estudiantes.add(estudiante)
+    
+    method decrementarCupo(){
+        cupo -=1
     }
-
-    method validarInscripcion(estudiante){
-        if(!self.cumpleRequisitos(estudiante)){
-            self.error("No se puede inscribir")
-        }
-    }
-
-    method inscriptos(){
-        return estudiantes
-    }
-
-    method puedeInscribirse(estudiante){
-        return self.perteneceACarrera(estudiante) && !estudiante.aprobo(self) && !self.estaInscripto(estudiante) && self.cumpleRequisitos(estudiante)
-    }
-
-    method cumpleRequisitos(estudiante){
-        return self.requisitos().all({
-                materia => estudiante.aprobo(materia)
-        })  
-    }
-
-    method estaInscripto(estudiante){
-        return estudiantes.contains(estudiante)
-    }
-
-    method perteneceACarrera(estudiante){
-        return estudiante.materiasDeCarreras().contains(self)
+    method inscribir(postulante) {
+        inscripcion.inscribir(postulante)
     }
 
     method validarNota(estudiante){
@@ -70,7 +47,7 @@ class Materia {
 
 
 
-class Historial {
+class HistorialDeEstudiante {
     const actasDeMaterias = #{}
     
     method agregarMateria(){}
@@ -95,7 +72,6 @@ class Historial {
                                         ,false)
     }
 
-    // Registrar materia
     method registrar(nota){
         actasDeMaterias.add(nota)
     }
@@ -105,9 +81,60 @@ class Historial {
     }
 }
 
-
 class ActaDeMateria {
     var property materia
     var property nota  
  
 }
+class Inscripcion {
+    
+    var property materia
+    
+    method inscribir(postulante){
+        self.validarInscripcion(postulante)
+        self.inscribirAMateriaOListaDeEspera(postulante)
+    }
+
+    method inscribirAMateriaOListaDeEspera(postulante){
+        if(self.hayCupo()){ self.inscribirAMateria(postulante) } else { self.inscribirEnLista(postulante)}
+        
+    }
+
+    method inscribirAMateria(postulante) {
+        materia.estudiantes().add(postulante)
+        materia.decrementarCupo()
+    }
+
+    method inscribirEnLista(postulante){
+        materia.listaDeEspera().add(postulante)
+    }
+
+    method hayCupo(){
+        return materia.estudiantes().size() <= materia.cupo()
+    }
+
+    method validarInscripcion(postulante){
+        if(!self.puedeInscribirse(postulante)){
+            self.error("No se puede inscribir")
+        }
+    }
+
+    method puedeInscribirse(postulante){
+        return self.perteneceACarrera(postulante) && !postulante.aprobo(materia) && !self.estaInscripto(postulante) && self.cumpleRequisitos(postulante)
+    }
+
+    method cumpleRequisitos(postulante){
+        return materia.requisitos().all({
+                materia => postulante.aprobo(materia)
+        })  
+    }
+
+    method estaInscripto(postulante){
+        return materia.estudiantes().contains(postulante)
+    }
+
+    method perteneceACarrera(estudiante){
+        return estudiante.materiasDeCarreras().contains(materia)
+    }
+}
+
