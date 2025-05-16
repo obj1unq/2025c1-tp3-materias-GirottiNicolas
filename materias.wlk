@@ -1,11 +1,15 @@
 import universidad.*
-import carreras.*
+import materia.*
 
 
 
 object trabajoFinal inherits Materia(carrera = programacion) {
      override method año(){
         return 4
+    }
+
+    override method requisitos(){ 
+        return 250
     }
 }
 

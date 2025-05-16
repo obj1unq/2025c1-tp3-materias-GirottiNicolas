@@ -1,5 +1,5 @@
 import materias.*
-import carreras.*
+import universidad.*
 import estudiante.*
 
 
