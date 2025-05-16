@@ -17,18 +17,16 @@ object matematica1 inherits Materia(carrera = programacion) {
 }
 
 object basesDeDatos inherits Materia(carrera = programacion) {}
-object objetos2 inherits Materia(carrera = programacion) {
+object objetos2 inherits Materia(carrera = programacion, cupo=4) {
     override method requisitos(){
         return [matematica1,objetos1]
     }
-    override method cupo(){ return 3}
 }
 
-object objetos3 inherits Materia(carrera = programacion) {
+object objetos3 inherits Materia(carrera = programacion,cupo=3) {
     override method requisitos(){
         return [objetos2, basesDeDatos]
     }
-    override method cupo(){ return 3}
 }
 
 object programacionConcurrente inherits Materia(carrera = programacion) {

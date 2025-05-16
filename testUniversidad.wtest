@@ -16,12 +16,18 @@ describe "Test de funcionalidad " {
         basesDeDatos.subirNota(roque, 7)
         quimica.inscribir(roque)
         quimica.subirNota(roque, 7)
-        elementosDeProgramacion.inscribir(luisa)
-        elementosDeProgramacion.subirNota(luisa, 10)
-        elementosDeProgramacion.inscribir(romina)
-        elementosDeProgramacion.subirNota(romina, 8)
-        elementosDeProgramacion.inscribir(alicia)
-        elementosDeProgramacion.subirNota(alicia, 8)
+        matematica1.inscribir(luisa)
+        matematica1.subirNota(luisa, 10)
+        matematica1.inscribir(romina)
+        matematica1.subirNota(romina, 8)
+        matematica1.inscribir(alicia)
+        matematica1.subirNota(alicia, 8)
+        objetos1.inscribir(luisa)
+        objetos1.subirNota(luisa, 10)
+        objetos1.inscribir(romina)
+        objetos1.subirNota(romina, 8)
+        objetos1.inscribir(alicia)
+        objetos1.subirNota(alicia, 8)
 
         
     }
@@ -41,6 +47,25 @@ describe "Test de funcionalidad " {
         assert.that(programacionConcurrente.inscripcion().estaInscripto(roque))
         biologia2.inscribir(roque)
         assert.that(biologia2.inscripcion().estaInscripto(roque))
+    }
+
+    test "roque se va a la lista de espera" {
+        objetos2.inscribir(alicia)
+        objetos2.inscribir(romina)
+        objetos2.inscribir(luisa)
+        objetos2.inscribir(roque)
+        assert.that(objetos2.listaDeEspera().contains(roque))
+    }
+
+
+    test "roque entra como campeon a objetos 2" {
+        objetos2.inscribir(alicia)
+        objetos2.inscribir(romina)
+        objetos2.inscribir(luisa)
+        objetos2.darDeBaja(romina)
+        objetos2.inscribir(roque)
+        assert.notThat(objetos2.listaDeEspera().contains(roque))
+        assert.that(objetos2.inscripcion().estaInscripto(roque))
     }
 
     test "Requisitos materias" {
