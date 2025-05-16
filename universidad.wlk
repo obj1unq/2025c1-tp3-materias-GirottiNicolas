@@ -9,6 +9,7 @@ object universidad {
 
 class Carrera {
     method materias()
+    
 }
 
 
@@ -38,6 +39,38 @@ class Materia {
         }
     }
 
+    method darDeBaja(estudiante){
+        if(inscripcion.estaInscripto(estudiante)){
+            self.quitarEstudiante(estudiante)
+            self.otorgarLugar()
+        }
+    }
+
+    method quitarEstudiante(estudiante){
+        estudiantes.remove(estudiante)
+        self.aumentarCupo()
+    }
+
+    method otorgarLugar(){
+        if (self.hayEstudiantesEnEspera()){
+            inscripcion.inscribir(self.primerEstudianteDeEspera())
+            self.decrementarCupo()
+            listaDeEspera.remove(self.primerEstudianteDeEspera())
+        }
+    }
+
+    method primerEstudianteDeEspera(){
+        return listaDeEspera.first()
+    }
+
+    method aumentarCupo(){
+        cupo +=1
+    }
+
+    method hayEstudiantesEnEspera() {
+        return !listaDeEspera.isEmpty()
+    }
+
     method subirNota(estudiante,nota){
         self.validarNota(estudiante)
         estudiante.historial().registrar(new ActaDeMateria(materia = self,nota = nota))
@@ -49,7 +82,6 @@ class Materia {
 
 class HistorialDeEstudiante {
     const actasDeMaterias = #{}
-    
     method agregarMateria(){}
 
     method notas(){ 
@@ -67,9 +99,11 @@ class HistorialDeEstudiante {
     }
 
     method aprobo(materia){
-        return self.materiasAprobadas().findOrDefault({
-                                        acta => acta.materia() == materia }
-                                        ,false)
+        return self.materiasDeActas(self.materiasAprobadas()).contains(materia)
+    }
+
+    method materiasDeActas(actas){
+        return actas.map({ acta => acta.materia()})
     }
 
     method registrar(nota){
