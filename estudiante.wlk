@@ -5,8 +5,8 @@ class Estudiante {
     
 
     method creditos(carrera){
-        return self.materiasAprobadasDe(carrera).sum({ acta => acta.materia().cantidadDeCreditos()
-            
+        return self.materiasAprobadasDe(carrera).sum({ 
+            acta => acta.materia().cantidadDeCreditos()
         })
     }
 

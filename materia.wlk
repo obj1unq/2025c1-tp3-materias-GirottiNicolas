@@ -19,7 +19,6 @@ class Materia {
     const property inscripcion = new Inscripcion(materia = self)
     
 
-    //method requisitos() {return []} 
     
     method requisito(){return sinRequisito}
 

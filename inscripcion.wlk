@@ -42,13 +42,7 @@ class Inscripcion {
     method puedeInscribirse(postulante){
         return self.perteneceACarrera(postulante) && !postulante.aprobo(materia) && !self.estaInscripto(postulante) && self.cumpleRequisitos(postulante)
     }
-    /*
-    method cumpleRequisitos(postulante){
-        return materia.requisitos().all({             // return materia.cumpleRequisito(estudiante)
-                materia => postulante.aprobo(materia)
-        })  
-    }
-    */
+    
 
     method cumpleRequisitos(postulante){
         return materia.requisito().cumpleRequisito(postulante)

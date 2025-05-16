@@ -29,6 +29,20 @@ describe "Test de funcionalidad " {
         objetos1.inscribir(alicia)
         objetos1.subirNota(alicia, 8)
 
+        elementosDeProgramacion.inscribir(luisa)
+        elementosDeProgramacion.subirNota(luisa, 10)
+        elementosDeProgramacion.inscribir(romina)
+        elementosDeProgramacion.subirNota(romina, 8)
+        elementosDeProgramacion.inscribir(alicia)
+        elementosDeProgramacion.subirNota(alicia, 8)
+        
+        basesDeDatos.inscribir(luisa)
+        basesDeDatos.subirNota(luisa, 10)
+        basesDeDatos.inscribir(romina)
+        basesDeDatos.subirNota(romina, 8)
+        basesDeDatos.inscribir(alicia)
+        basesDeDatos.subirNota(alicia, 8)
+        // Estas inscripciones no figuraban en el assignament, pero fueron necesarias por el bonus
         
     }
 
