@@ -15,7 +15,12 @@ class Carrera {
 
 
 class Materia {
-    
+    method cantidadDeCreditos(){
+        return 12
+    }
+
+    method año(){return 1}
+
     var property carrera  
     var property cupo = 30
     var property listaDeEspera = []

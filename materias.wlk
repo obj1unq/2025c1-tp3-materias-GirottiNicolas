@@ -3,7 +3,11 @@ import carreras.*
 
 
 
-object trabajoFinal inherits Materia(carrera = programacion) {}
+object trabajoFinal inherits Materia(carrera = programacion) {
+     override method año(){
+        return 4
+    }
+}
 
 object quimica inherits Materia(carrera = medicina) {}
 object anatomiaGeneral inherits Materia(carrera = medicina) {}
@@ -21,11 +25,17 @@ object objetos2 inherits Materia(carrera = programacion, cupo=3) {
     override method requisitos(){
         return [matematica1,objetos1]
     }
+    override method año(){
+        return 2
+    }
 }
 
 object objetos3 inherits Materia(carrera = programacion,cupo=3) {
     override method requisitos(){
         return [objetos2, basesDeDatos]
+    }
+    override method año(){
+        return 3
     }
 }
 
@@ -33,6 +43,9 @@ object programacionConcurrente inherits Materia(carrera = programacion) {
 
     override method requisitos() {
         return [objetos1, basesDeDatos]
+    }
+     override method año(){
+        return 3
     }
 }
 
