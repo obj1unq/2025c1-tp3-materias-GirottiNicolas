@@ -3,6 +3,9 @@ import materias.*
 
 class Carrera {
     method materias()
+    method perteneceACarrera(materia){
+        return self.materias().contains(materia)
+    }
     
 }
 

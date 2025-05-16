@@ -3,7 +3,18 @@
 class Estudiante {
     var property historial = new HistorialDeEstudiante()
     
-    var property creditos = 0 
+
+    method creditos(carrera){
+        return self.materiasAprobadasDe(carrera).sum({ acta => acta.materia().cantidadDeCreditos()
+            
+        })
+    }
+
+    method materiasAprobadasDe(carrera){
+        return historial.materiasAprobadas().filter({ 
+                       acta => carrera.perteneceACarrera(acta.materia())
+        })
+    }
 
     method carreras(){
         return []

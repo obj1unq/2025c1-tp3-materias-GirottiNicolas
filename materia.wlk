@@ -1,5 +1,6 @@
 import estudiante.*
 import inscripcion.*
+import requisito.*
 
 
 
@@ -8,7 +9,7 @@ class Materia {
         return 12
     }
 
-    method año(){return 1}
+    method ciclo(){return 1}
 
     var property carrera  
     var property cupo = 30
@@ -18,8 +19,10 @@ class Materia {
     const property inscripcion = new Inscripcion(materia = self)
     
 
-    method requisitos() {return []}
+    //method requisitos() {return []} 
     
+    method requisito(){return sinRequisito}
+
     method decrementarCupo(){
         cupo -=1
     }

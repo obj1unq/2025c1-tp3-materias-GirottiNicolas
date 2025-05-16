@@ -73,11 +73,21 @@ describe "Test de funcionalidad " {
 
     }
 
-    test "Requisitos materias" {
-        assert.equals([matematica1,objetos1],objetos2.requisitos())
-        assert.equals([objetos2,basesDeDatos],objetos3.requisitos())
-        assert.equals([objetos1, basesDeDatos],programacionConcurrente.requisitos())
-        assert.equals([biologia1],biologia2.requisitos())
+
+
+    test "Cumple requisitos de materias de años anteriores" {
+        assert.that(objetos2.requisito().cumpleRequisito(roque))
+        
+    }
+
+
+    test "Roque no cumple requisitos de objetos 3" {
+        assert.notThat(objetos3.requisito().cumpleRequisito(roque))
+        
+    }
+
+    test "Roque todavia no puede cursar Trabajo Final" {
+        assert.notThat(trabajoFinal.requisito().cumpleRequisito(roque))
     }
 
 }

@@ -1,4 +1,4 @@
-
+import estudiantes.roque
 
 
 class Requisito {
@@ -9,19 +9,23 @@ class Requisito {
 
 class RequisitoCredito inherits Requisito() {
     var property creditoNecesario
+    var property carrera
     override method cumpleRequisito(estudiante){
-        return estudiante.creditos() >= creditoNecesario
+        return estudiante.creditos(carrera) >= creditoNecesario
     }
 
 
 }
+
+
 
 class RequisitoPorCiclo inherits Requisito {
     var property cicloNecesario
     var property carrera
 
     method materiasObligatorias(){
-        return carrera.materias().filter({materia => materia.ciclo() >= cicloNecesario - 1})
+        return carrera.materias().filter({
+                        materia => cicloNecesario >= materia.ciclo() })
     }
 
     override method cumpleRequisito(estudiante) {
