@@ -144,7 +144,7 @@ class Inscripcion {
     }
 
     method hayCupo(){
-        return materia.estudiantes().size() <= materia.cupo()
+        return  materia.cupo() > 0
     }
 
     method validarInscripcion(postulante){

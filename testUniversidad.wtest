@@ -59,13 +59,18 @@ describe "Test de funcionalidad " {
 
 
     test "roque entra como campeon a objetos 2" {
+        assert.equals(3, objetos2.cupo())
         objetos2.inscribir(alicia)
         objetos2.inscribir(romina)
         objetos2.inscribir(luisa)
+        assert.equals(0, objetos2.cupo())
         objetos2.darDeBaja(romina)
+        assert.equals(1, objetos2.cupo())
         objetos2.inscribir(roque)
         assert.notThat(objetos2.listaDeEspera().contains(roque))
         assert.that(objetos2.inscripcion().estaInscripto(roque))
+        assert.equals(0, objetos2.cupo())
+
     }
 
     test "Requisitos materias" {

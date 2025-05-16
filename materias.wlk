@@ -17,7 +17,7 @@ object matematica1 inherits Materia(carrera = programacion) {
 }
 
 object basesDeDatos inherits Materia(carrera = programacion) {}
-object objetos2 inherits Materia(carrera = programacion, cupo=4) {
+object objetos2 inherits Materia(carrera = programacion, cupo=3) {
     override method requisitos(){
         return [matematica1,objetos1]
     }
