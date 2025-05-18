@@ -1,0 +1,107 @@
+import universidad.*
+import materias.*
+import estudiantes.*
+describe "Test de funcionalidad " {
+
+    method initialize(){
+        elementosDeProgramacion.inscribir(roque)
+        elementosDeProgramacion.subirNota(roque, 9)
+        biologia1.inscribir(roque)
+        biologia1.subirNota(roque, 8)
+        matematica1.inscribir(roque)
+        matematica1.subirNota(roque, 8)
+        objetos1.inscribir(roque)
+        objetos1.subirNota(roque, 7)
+        basesDeDatos.inscribir(roque)
+        basesDeDatos.subirNota(roque, 7)
+        quimica.inscribir(roque)
+        quimica.subirNota(roque, 7)
+        matematica1.inscribir(luisa)
+        matematica1.subirNota(luisa, 10)
+        matematica1.inscribir(romina)
+        matematica1.subirNota(romina, 8)
+        matematica1.inscribir(alicia)
+        matematica1.subirNota(alicia, 8)
+        objetos1.inscribir(luisa)
+        objetos1.subirNota(luisa, 10)
+        objetos1.inscribir(romina)
+        objetos1.subirNota(romina, 8)
+        objetos1.inscribir(alicia)
+        objetos1.subirNota(alicia, 8)
+
+        elementosDeProgramacion.inscribir(luisa)
+        elementosDeProgramacion.subirNota(luisa, 10)
+        elementosDeProgramacion.inscribir(romina)
+        elementosDeProgramacion.subirNota(romina, 8)
+        elementosDeProgramacion.inscribir(alicia)
+        elementosDeProgramacion.subirNota(alicia, 8)
+        
+        basesDeDatos.inscribir(luisa)
+        basesDeDatos.subirNota(luisa, 10)
+        basesDeDatos.inscribir(romina)
+        basesDeDatos.subirNota(romina, 8)
+        basesDeDatos.inscribir(alicia)
+        basesDeDatos.subirNota(alicia, 8)
+        // Estas inscripciones no figuraban en el assignament, pero fueron necesarias por el bonus
+        
+    }
+
+    test "Roque se inscribe en objetos 2 pero no en objetos 3" {
+        objetos2.inscribir(roque)
+        assert.that(objetos2.inscripcion().estaInscripto(roque))
+        assert.notThat(objetos3.inscripcion().puedeInscribirse(roque))
+    }
+
+    test "roque se inscribe en objetos 2, programacion concurrente,y biologia2" {
+        objetos2.darDeBaja(roque)
+        assert.notThat(objetos2.inscripcion().estaInscripto(roque))
+        objetos2.inscribir(roque)
+        assert.that(objetos2.inscripcion().estaInscripto(roque))
+        programacionConcurrente.inscribir(roque)
+        assert.that(programacionConcurrente.inscripcion().estaInscripto(roque))
+        biologia2.inscribir(roque)
+        assert.that(biologia2.inscripcion().estaInscripto(roque))
+    }
+
+    test "roque se va a la lista de espera" {
+        objetos2.inscribir(alicia)
+        objetos2.inscribir(romina)
+        objetos2.inscribir(luisa)
+        objetos2.inscribir(roque)
+        assert.that(objetos2.listaDeEspera().contains(roque))
+    }
+
+
+    test "roque entra como campeon a objetos 2" {
+        assert.equals(3, objetos2.cupo())
+        objetos2.inscribir(alicia)
+        objetos2.inscribir(romina)
+        objetos2.inscribir(luisa)
+        assert.equals(0, objetos2.cupo())
+        objetos2.darDeBaja(romina)
+        assert.equals(1, objetos2.cupo())
+        objetos2.inscribir(roque)
+        assert.notThat(objetos2.listaDeEspera().contains(roque))
+        assert.that(objetos2.inscripcion().estaInscripto(roque))
+        assert.equals(0, objetos2.cupo())
+
+    }
+
+
+
+    test "Cumple requisitos de materias de años anteriores" {
+        assert.that(objetos2.requisito().cumpleRequisito(roque))
+        
+    }
+
+
+    test "Roque no cumple requisitos de objetos 3" {
+        assert.notThat(objetos3.requisito().cumpleRequisito(roque))
+        
+    }
+
+    test "Roque todavia no puede cursar Trabajo Final" {
+        assert.notThat(trabajoFinal.requisito().cumpleRequisito(roque))
+    }
+
+}
